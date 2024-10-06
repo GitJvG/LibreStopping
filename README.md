@@ -1,4 +1,4 @@
-# LibRecommender Early Stopping
+# LibreStopping | LibRecommender Early Stopping
 
 This repository provides an implementation of early stopping functionality for models in the **LibRecommender** framework. Early stopping is a form of regularization used to avoid overfitting when training a model. This implementation allows users to monitor a specified performance metric and halt training when performance ceases to improve.
 
@@ -21,7 +21,7 @@ This repository provides an implementation of early stopping functionality for m
 To install the repository, clone it to your local machine using:
 
 ```bash
-git clone https://github.com/GitJvG/Librec_EarlyStopper.git
+git clone https://github.com/GitJvG/LibreStopping.git
 ```
 
 ## Usage Examples
