@@ -1,5 +1,5 @@
 class EarlyStopping:
-    def __init__(self, model_path, model_name, data_info, patience=5):
+    def __init__(self, model_path, model_name, data_info, patience=5, monitor_metric="roc_auc"):
         """
         Initialize early stopping parameters.
 
@@ -8,6 +8,7 @@ class EarlyStopping:
         - model_name: Name of the model to be saved.
         - data_info: Dataset information.
         - patience: Number of epochs with no improvement to wait before stopping.
+        - monitor_metric: The metric to monitor for early stopping (e.g., 'roc_auc', 'loss', 'precision').
         """
         self.patience = patience
         self.counter = 0
@@ -17,6 +18,7 @@ class EarlyStopping:
         self.early_stop = False
         self.data_info = data_info
         self.epoch = 0  # Initialize epoch counter
+        self.monitor_metric = monitor_metric  # The metric to monitor
 
     def train_with_early_stopping(self, create_model, fit_model, train_data, eval_data, evaluate_model):
         """
@@ -43,13 +45,13 @@ class EarlyStopping:
 
             # Evaluate the model
             evaluation_results = evaluate_model(model, eval_data)
-            current_roc_auc = evaluation_results['roc_auc']
-            print(f"Epoch {self.epoch}: ROC AUC = {current_roc_auc}")
+            current_score = evaluation_results[self.monitor_metric]  # Use the monitored metric
+            print(f"Epoch {self.epoch}: {self.monitor_metric} = {current_score}")
 
             # Check for improvement and handle early stopping logic
-            self.check(current_roc_auc, model)
+            self.check(current_score, model)
 
-        print(f"Training stopped at epoch {self.epoch}. Best ROC AUC: {self.best_score}")
+        print(f"Training stopped at epoch {self.epoch}. Best {self.monitor_metric}: {self.best_score}")
         return model  # Return the best model
 
     def check(self, score, model):
@@ -57,7 +59,7 @@ class EarlyStopping:
         Checks if the current score is better than the best score and triggers early stopping if no improvement.
 
         Parameters:
-        - score: Current evaluation score (e.g., ROC AUC).
+        - score: Current evaluation score for the monitored metric.
         - model: The trained model.
 
         Returns:
@@ -67,7 +69,7 @@ class EarlyStopping:
             self.best_score = score
             self.save_model(model)  # Save the model if there's an improvement
             self.counter = 0  # Reset the patience counter
-            print(f"New best score: {self.best_score} at epoch {self.epoch}")
+            print(f"New best {self.monitor_metric}: {self.best_score} at epoch {self.epoch}")
         else:
             self.counter += 1
             if self.counter >= self.patience:
