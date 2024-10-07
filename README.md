@@ -35,6 +35,7 @@ git clone https://github.com/GitJvG/LibreStopping.git
 Before using the `EarlyStopping` class, ensure you have the required support functions and variables set up:
 
 ```python
+# These libraries are only examples
 from libreco.algorithms import TwoTower
 from libreco.evaluation import evaluate
 from libreco.data import DatasetFeat
