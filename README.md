@@ -7,7 +7,6 @@ This repository provides an implementation of early stopping functionality for m
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [EarlyStopping Class](#earlystopping-class)
 - [License](#license)
 
 ## Features
@@ -18,24 +17,16 @@ This repository provides an implementation of early stopping functionality for m
 
 ## Installation
 
-To install the repository, clone it to your local machine using:
+To install the repository, install it using pip:
+
+```bash
+pip install LibreStopping
+```
+
+or clone it to your local machine using:
 
 ```bash
 git clone https://github.com/GitJvG/LibreStopping.git
-```
-
-### Optional: Local pip installation
-
-If you want to install the library locally using `pip`, navigate to the root directory of the project and run:
-
-```bash
-pip install .
-```
-
-Alternatively, to install it in editable mode for development purposes, run:
-
-```bash
-pip install -e .
 ```
 
 ## Usage
