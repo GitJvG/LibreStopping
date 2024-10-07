@@ -24,7 +24,21 @@ To install the repository, clone it to your local machine using:
 git clone https://github.com/GitJvG/LibreStopping.git
 ```
 
-## Usage Examples
+### Optional: Local pip installation
+
+If you want to install the library locally using `pip`, navigate to the root directory of the project and run:
+
+```bash
+pip install .
+```
+
+Alternatively, to install it in editable mode for development purposes, run:
+
+```bash
+pip install -e .
+```
+
+## Usage
 
 ### Required Support Functions and Variables
 Before using the `EarlyStopping` class, ensure you have the required support functions and variables set up:
@@ -93,3 +107,7 @@ best_model = early_stopping.train_with_early_stopping(
     evaluate_model=evaluate_model # Function to evaluate the model
 )
 ```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
