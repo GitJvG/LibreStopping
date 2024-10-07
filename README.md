@@ -7,7 +7,6 @@ This repository provides an implementation of early stopping functionality for m
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [EarlyStopping Class](#earlystopping-class)
 - [License](#license)
 
 ## Features
@@ -87,7 +86,7 @@ def evaluate_model(model, eval_data):
 ### Using EarlyStopping to Train Your Model
 
 ```python
-from earlystopping import EarlyStopping  # Import the EarlyStopping class
+from LibreStopping.LibreStopping import EarlyStopping  # Import the EarlyStopping class
 
 # Initialize EarlyStopping
 early_stopping = EarlyStopping(
