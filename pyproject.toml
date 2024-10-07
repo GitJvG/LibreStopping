@@ -11,8 +11,8 @@ license = { text = "MIT" }
 authors = [
     { name = "Jurrian van Geresteijn", email = "Jurrian6@gmail.com" }
 ]
-url = "https://github.com/GitJvG/LibreStopping"
-python-versions = ">=3.6"
+urls = { "Homepage" = "https://github.com/GitJvG/LibreStopping" }
+requires-python = ">=3.6"
 keywords = []
 
 dependencies = []
