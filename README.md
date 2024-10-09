@@ -88,6 +88,8 @@ early_stopping = EarlyStopping(
     data_info=data_info,               # Dataset information
     patience=5,                        # Number of epochs to wait before stopping
     monitor_metric="loss"           # Metric to monitor
+    savedata_overwrite=True         # Optional Kwarg to customize data saving
+    savemodel_inference_only=False  # Optional Kwarg to customize model saving
 )
 
 # Start training with early stopping

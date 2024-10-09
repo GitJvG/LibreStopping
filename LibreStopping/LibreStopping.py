@@ -1,28 +1,37 @@
 class EarlyStopping:
-    def __init__(self, model_path, model_name, data_info, patience=5, monitor_metric="roc_auc"):
-        """
-        Initialize early stopping parameters.
+    def __init__(self, save_path, model_name, data_info, patience=5, monitor_metric="roc_auc", **kwargs):
+        """Initialize early stopping parameters.
 
-        Parameters:
-        - model_path: Path to save the best model.
+        **Parameters:**
+        - save_path: Path to save the model to.
         - model_name: Name of the model to be saved.
         - data_info: Dataset information.
         - patience: Number of epochs with no improvement to wait before stopping.
         - monitor_metric: The metric to monitor for early stopping (e.g., 'roc_auc', 'loss', 'precision').
+        
+        **Kwargs:**
+        - Pass parameters for saving data and models using the following naming conventions:
+            - Prefix parameters related to saving data with `savedata_`
+            - Prefix parameters related to saving the model with `savemodel_`
         """
         self.patience = patience
         self.counter = 0
         self.best_score = None
-        self.model_path = model_path
+        self.save_path = save_path
         self.model_name = model_name
         self.early_stop = False
         self.data_info = data_info
         self.epoch = 0  # Initialize epoch counter
         self.monitor_metric = monitor_metric  # The metric to monitor
 
+        # Separate kwargs into savedata_params and savemodel_params
+        self.savedata_params = {k: v for k, v in kwargs.items() if k.startswith("savedata_")}
+        self.savemodel_params = {k: v for k, v in kwargs.items() if k.startswith("savemodel_")}
+
+
     def train_with_early_stopping(self, create_model, fit_model, train_data, eval_data, evaluate_model):
         """
-        Trains the model with early stopping. It handles the training loop, evaluation, and early stopping.
+        Trains the model with early stopping.
 
         Parameters:
         - create_model: Function to create a new model.
@@ -79,7 +88,6 @@ class EarlyStopping:
         return self.early_stop
 
     def save_model(self, model):
-        """Saves the model along with data information (if available)."""
-        if self.data_info is not None:
-            self.data_info.save(self.model_path, model_name=self.model_name)
-        model.save(self.model_path, model_name=self.model_name)
+        """Saves the model along with data information."""
+        self.data_info.save(self.save_path, model_name=self.model_name, **self.savedata_params) 
+        model.save(self.save_path, model_name=self.model_name, **self.savemodel_params)
